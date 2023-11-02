@@ -1,5 +1,4 @@
-declare module 'react-native-zendesk-v2' {
-
+declare module "react-native-zendesk-v2" {
   // function to display chat box
   export function startChat(chatOptions: ChatOptions): void;
 
@@ -9,54 +8,63 @@ declare module 'react-native-zendesk-v2' {
   // init function when you just want to use chat sdk
   export function initChat(accountKey: string): void;
 
-  // function to set primary color code for the chat theme, pass hex code of the color here
-  export function setPrimaryColor(color: string): void;
-
   // function to display help center UI
-  export function showHelpCenter(chatOptions: ChatOptions): void;
+  export function showHelpCenter(helpCenterOptions: HelpCenterOptions): void;
 
   // function to set visitor info in chat
   export function setVisitorInfo(visitorInfo: UserInfo): void;
 
+  // function to set visitor info in chat
+  export function setUserIdentity(userIdentity: UserInfo): void;
+
   // function to register notifications token with zendesk
   export function setNotificationToken(token: string): void;
-  
+
   interface ChatOptions extends UserInfo {
-    botName?: string
+    botName?: string;
     // boolean value if you want just chat sdk or want to use all the sdk like support, answer bot and chat
     // true value means just chat sdk
-    chatOnly?: boolean
-    // hex code color to set on chat
-    color?: string
-    /* help center specific props only */
+    chatOnly?: boolean;
+  }
+
+  interface HelpCenterOptions {
     // sent in help center function only to show help center with/without chat
-    withChat?: boolean
+    withChat?: boolean;
+
     // to enable/disable ticket creation in help center
-    disableTicketCreation?: boolean
+    withTicketCreation?: boolean;
+
+    // List of section IDs to fetch articles from
+    sectionIds?: string[];
   }
 
   interface InitOptions {
     // chat key of zendesk account to init chat
-    key: string,
+    key: string;
+
     // appId of your zendesk account
-    appId: string,
+    appId: string;
+
     // clientId of your zendesk account
-    clientId: string,
+    clientId: string;
+
     // support url of zendesk account
-    url: string,
+    url: string;
+
+    // starts the sdk as loggable (debug mode)
+    loggable?: boolean;
   }
 
   interface UserInfo {
-     // user's name
-    name: string
+    // user's name
+    name: string;
     // user's email
-    email: string
+    email: string;
     // user's phone
-    phone?: number
+    phone?: number;
     // department to redirect the chat
-    department?: string
+    department?: string;
     // tags for chat
-    tags?: Array<string>
+    tags?: Array<string>;
   }
-
 }
