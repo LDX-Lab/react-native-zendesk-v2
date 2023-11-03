@@ -1,10 +1,11 @@
-
 # react-native-zendesk [![npm version](https://badge.fury.io/js/react-native-zendesk-v2.svg)](https://badge.fury.io/js/react-native-zendesk-v2)
+
 [![NPM](https://nodei.co/npm/react-native-zendesk-v2.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-native-zendesk-v2/)
 
 React native wrapper for zendesk unified SDK. Supports both iOS and Android platforms.
 
 ## VERSIONS
+
 It's an alpha version release as of now and only tested on RN >=0.61.0. Bugs and issues can be there.
 
 ## Getting Started
@@ -29,7 +30,6 @@ It's an alpha version release as of now and only tested on RN >=0.61.0. Bugs and
 
    In Xcode, drag and drop `node_modules/react-native-zendesk-chat/RNZendeskChat.m` and `node_modules/react-native-zendesk-chat/RNZendeskChat.h` into your project.
 
-
 #### Android
 
 You need to add this in your root build.gradle under allProjects -> repositories file of the project.
@@ -42,9 +42,11 @@ In your code add:
 Step 1. import RNZendeskChat from 'react-native-zendesk'
 
 ### Initialisation
+
 Place this code at the root of your application to initialize Zendesk SDK.
 
 For all supported SDKs
+
 ```javascript
 RNZendeskChat.init({
 	key: <chatAccountKey>,
@@ -58,6 +60,7 @@ If you just want ChatSDK use this instead:
 `RNZendeskChat.initChat('<chatAccountKey>')`
 
 Step 2. Set user identifier
+
 - If your chat just runs behind a login you can pass in name and email whenever user logins if not, pass a JWT Token to identify the user on chat
 
 ```
@@ -65,8 +68,10 @@ Step 2. Set user identifier
 		name: <name>,
 		email: <email>,
 	})
- ```
+```
+
 - If you want to start chat without any user details you can use a JWT token.
+
 ```
 	RNZendeskChat.setUserIdentity({
 		token: <JWT TOKEN>
@@ -74,8 +79,11 @@ Step 2. Set user identifier
 ```
 
 Step 3. Show the UI based on what SDK you want to use
+
 ### Chat SDK
-** To use chat sdk without answer bot, please add `chatOnly: true` in this method
+
+\*\* To use chat sdk without answer bot, please add `chatOnly: true` in this method
+
 ```
 	ZendeskChat.startChat({
 		name: user.full_name,
@@ -85,32 +93,38 @@ Step 3. Show the UI based on what SDK you want to use
 		department: "Your department"
 	});
 ```
-| Props  | Description |
-|--|--|
-| name | Name of the user |
-| email | Email of the user
-| phone | Phone number of the user |
-| tags | Some specific tags you want to associate with the chat
-| department | Any department you want to associate chat with |
-| chatOnly | If you just want to start the ChatSDK and not answer or support SDKs. | 
-| botName | The botname you want to show on your chat |
-| color | Primary color (hex code) for chat bubbles only on iOS |
+
+| Props      | Description                                                           |
+| ---------- | --------------------------------------------------------------------- |
+| name       | Name of the user                                                      |
+| email      | Email of the user                                                     |
+| phone      | Phone number of the user                                              |
+| tags       | Some specific tags you want to associate with the chat                |
+| department | Any department you want to associate chat with                        |
+| chatOnly   | If you just want to start the ChatSDK and not answer or support SDKs. |
+| botName    | The botname you want to show on your chat                             |
+| color      | Primary color (hex code) for chat bubbles only on iOS                 |
 
 ### Help Center (with and Without Chat SDK)
+
 To initiate and display help center use the following method:
+
 ```
 RNZendesk.showHelpCenter({
 	withChat: true // add this if you want to use chat instead of ticket creation
 	disableTicketCreation: true // add this if you want to just show help center and not add ticket creation
 })
 ```
-You can use either of these options `withChat` or `disableTicketCreation`, both can't be used together. 
 
-*NOTE: Zendesk support with chat enabled is currently buggy, I am trying to resolve that issue. At present you can show help center with normal ticket creation.*
+You can use either of these options `withChat` or `disableTicketCreation`, both can't be used together.
+
+_NOTE: Zendesk support with chat enabled is currently buggy, I am trying to resolve that issue. At present you can show help center with normal ticket creation._
 Working on currently adding more config options here and add customising properties.
 
 ### Customising Looks
+
 For styling in android create a theme in your android folder with the following properties
+
 ```
 <style  name="ZendeskTheme"  parent="Theme.MaterialComponents.Light">
 
@@ -122,7 +136,9 @@ For styling in android create a theme in your android folder with the following 
 
 </style>
 ```
+
 And then add following to your project's AndroidManifest.xml file (use only the SDKs you use)
+
 ```
       <activity android:name="zendesk.support.guide.HelpCenterActivity"
             android:theme="@style/ZendeskTheme" />
@@ -140,18 +156,20 @@ And then add following to your project's AndroidManifest.xml file (use only the 
 ```
 
 For iOS only added a new function which can be used as below. This would set the primary color for the chat and other sdks
+
 ```
 	RNZendesk.setPrimaryColor(<hex color string>)
 
 ```
 
 ### Push notifications
+
 For push notifications added a method to register token in Zendesk, all other handling and stuff needs to be done on the app itself.
 To register your token with Zendesk call
+
 ```
 	RNZendesk.setNotificationToken(<your token>)
 ```
-
 
 ## TODO
 
